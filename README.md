@@ -1,73 +1,140 @@
-# Social Network Ads - Random Forest Classification
+# Social Network Ads Classification
 
-This project uses a Random Forest Classifier to predict product purchase based on age and salary from the "Social Network Ads" dataset.
+A machine learning project that predicts whether a user will purchase a product based on their age and estimated salary using Random Forest Classification.
 
-## Table of Contents
+## Overview
 
-- [Overview](#overview)
-- [Dataset](#dataset)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Model Evaluation](#model-evaluation)
-- [Hyperparameter Tuning](#hyperparameter-tuning)
-- [Feature Importance](#feature-importance)
-- [Visualization](#visualization)
-- [Future Improvements](#future-improvements)
-- [License](#license)
-- [Author](#author)
+This project implements a Random Forest Classifier to analyze social network advertising data and predict customer purchasing behavior. The model uses demographic information (age and salary) to predict whether a user will purchase a product after seeing an advertisement.
 
-## 1. Overview
+## Features
 
-This project builds a classification model predicting product purchase based on user demographics (age and salary) using the Random Forest algorithm.
+- Data preprocessing and scaling
+- Random Forest Classification model
+- Comprehensive model evaluation metrics
+- Visual analysis including:
+  - Feature importance plots
+  - Decision boundary visualization
+  - Confusion matrix heatmap
+- Hyperparameter tuning capabilities
+- Object-oriented implementation for easy reuse and modification
 
-## 2. Dataset
+## Prerequisites
 
-"Social_Network_Ads.csv" (located at `/content/drive/MyDrive/Machine Learning A-Z (Codes and Datasets)/Part 3 - Classification/Section 20 - Random Forest Classification/Python/` - adjust path if needed). Columns: User ID, Gender, Age, EstimatedSalary, Purchased (0: No, 1: Yes).  User ID and Gender are not used in training.
+- Python 3.8+
+- Required packages:
+  ```
+  numpy>=1.19.2
+  pandas>=1.2.0
+  scikit-learn>=0.24.0
+  matplotlib>=3.3.0
+  seaborn>=0.11.0
+  ```
 
-## 3. Dependencies
+## Installation
 
-Python libraries: pandas, numpy, scikit-learn, matplotlib. Install: `pip install pandas numpy scikit-learn matplotlib`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/social-network-ads.git
+   cd social-network-ads
+   ```
 
-## 4. Installation
+2. Create and activate a virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-1. Clone: `git clone [your-repository-url]`
-2. Navigate: `cd [your-repository-directory]`
-3. Install dependencies (see section 3).
-4. Place `Social_Network_Ads.csv` in the specified directory.
+3. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 5. Usage
+## Usage
 
-Run `your_script_name.py`: This loads data, splits into train/test, scales features, trains Random Forest, predicts, evaluates (confusion matrix, accuracy, classification report), displays feature importances, and visualizes the decision boundary.
+1. Prepare your data:
+   - Ensure your dataset is in CSV format
+   - Required columns: 'Age', 'EstimatedSalary', 'Purchased'
+   - Place the CSV file in the project directory
 
-## 6. Model Evaluation
+2. Run the classifier:
+   ```python
+   from social_network_ads_classifier import SocialNetworkAdsClassifier
+   
+   # Initialize and run the classifier
+   classifier = SocialNetworkAdsClassifier('Social_Network_Ads.csv')
+   
+   # Run the complete pipeline
+   (classifier
+       .load_data()
+       .split_and_scale()
+       .train()
+       .evaluate()
+       .plot_feature_importance()
+       .plot_decision_boundary())
+   ```
 
-Metrics: Confusion Matrix, Accuracy, Classification Report (precision, recall, F1-score), Feature Importances.
+3. Optional: Perform hyperparameter tuning:
+   ```python
+   # Define custom parameter grid if needed
+   param_grid = {
+       'n_estimators': [10, 50, 100, 200],
+       'max_depth': [None, 10, 20, 30],
+       'min_samples_split': [2, 5, 10],
+       'min_samples_leaf': [1, 2, 4]
+   }
+   
+   # Run grid search
+   best_model = classifier.perform_grid_search(param_grid)
+   ```
 
-## 7. Hyperparameter Tuning
+## Model Evaluation
 
-Use `GridSearchCV` or `RandomizedSearchCV` (example commented out in code) to tune `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, etc.
+The classifier provides several evaluation metrics:
+- Confusion Matrix
+- Classification Report (Precision, Recall, F1-score)
+- Overall Accuracy Score
+- Feature Importance Analysis
 
-## 8. Feature Importance
+## Output Examples
 
-Calculates and displays feature importances, visualizing influential factors.
+The model generates several visualizations:
+1. Confusion Matrix Heatmap: Shows true positives, false positives, true negatives, and false negatives
+2. Feature Importance Plot: Displays the relative importance of age and salary in predictions
+3. Decision Boundary Plot: Visualizes how the model separates different classes in the feature space
 
-## 9. Visualization
+## Project Structure
 
-Visualizes the decision boundary on the test set.
+```
+social-network-ads/
+├── README.md
+├── requirements.txt
+├── social_network_ads_classifier.py
+├── data/
+│   └── Social_Network_Ads.csv
+└── examples/
+    └── example_usage.py
+```
 
-## 10. Future Improvements
+## Contributing
 
-- Hyperparameter Optimization (GridSearchCV/RandomizedSearchCV)
-- Cross-Validation (k-fold)
-- Feature Engineering
-- Ensemble Methods (GBM, XGBoost)
-- More Detailed Analysis
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 11. License
+## License
 
-MIT License (see LICENSE file).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 12. Author
+## Contact
 
-S.VIJAYARAGUL EMAIL:- vijayaragul2005@gmail.com 
+Your Name - S.VIJAYARAGUL
+
+EMAIL Link: vijayaragul2005@gmail.com
+
+## Acknowledgments
+
+- Social Network Ads dataset providers
+- The scikit-learn team for their excellent machine learning library
+- Contributors and maintainers of the dependencies used in this project
